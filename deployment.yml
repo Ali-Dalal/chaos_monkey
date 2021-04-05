@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chaos-monkey
+spec:
+  selector:
+    matchLabels:
+      app: chaos-monkey-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: chaos-monkey-app
+    spec:
+      containers:
+        - name: chaos-monkey-app
+          image: allloush92/chaos_monkey:latest
+          imagePullPolicy: Never
