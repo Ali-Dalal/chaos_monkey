@@ -15,7 +15,6 @@ func main() {
 	err := godotenv.Load()
 	if err!=nil {
 		utils.LogError("Could not load env variables")
-		panic(err.Error())
 	}
 	rate := os.Getenv("rate")
 	namespace := os.Getenv("namespace")
