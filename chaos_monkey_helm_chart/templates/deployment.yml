@@ -14,5 +14,10 @@ spec:
     spec:
       containers:
         - name: chaos-monkey-app
-          image: allloush92/chaos_monkey:latest
-          imagePullPolicy: Never
+          image: allloush92/chaos_monkey:1.0.0
+          imagePullPolicy: Always
+          env:
+            - name: namespace
+              value: "travix-dev"
+            - name: rate
+              value: "1"

@@ -22,7 +22,7 @@ func main() {
 	utils.LogInfo(fmt.Sprintf("Running chaos monkey for namespace %s and rate %s minute(s)",namespace, rate))
 	k8sClient := service.GetClient()
 	c := cron.New()
-	_, _ = c.AddFunc(fmt.Sprintf("@every %ss", rate), func() {
+	_, _ = c.AddFunc(fmt.Sprintf("@every %sm", rate), func() {
 		service.KillRandomPod(k8sClient, namespace)
 	})
 	c.Run()
