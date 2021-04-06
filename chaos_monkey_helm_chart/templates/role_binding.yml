@@ -1,13 +1,13 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: pods-controller-binding
-  namespace: travix-dev
+  name: {{ .Values.roleBinding.name }}
+  namespace: {{ .Values.remoteNamespace }}
 subjects:
   - kind: ServiceAccount
     name: default
-    namespace: default
+    namespace: {{ .Values.namespace }}
 roleRef:
-  kind: ClusterRole
-  name: pods-controller
-  apiGroup: rbac.authorization.k8s.io
+  kind: {{ .Values.role.kind }}
+  name: {{ .Values.role.name }}
+  apiGroup: {{ .Values.role.apiGroup }}

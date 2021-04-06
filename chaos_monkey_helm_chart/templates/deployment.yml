@@ -1,12 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: chaos-monkey
+  name: {{ .Release.Name }}-app
 spec:
   selector:
     matchLabels:
       app: chaos-monkey-app
-  replicas: 1
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
   template:
     metadata:
       labels:
@@ -14,10 +16,10 @@ spec:
     spec:
       containers:
         - name: chaos-monkey-app
-          image: allloush92/chaos_monkey:1.0.0
-          imagePullPolicy: Always
+          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: namespace
-              value: "travix-dev"
+              value: {{ .Values.remoteNamespace }}
             - name: rate
-              value: "1"
+              value: "{{ .Values.chaosMonkeyRate }}"
