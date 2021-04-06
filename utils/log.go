@@ -11,5 +11,5 @@ func LogInfo(args ... interface{})  {
 }
 
 func LogError(args ...interface{})  {
-	logrus.Error(args)
+	logrus.Error(args...)
 }

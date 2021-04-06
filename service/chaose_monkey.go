@@ -7,8 +7,8 @@ import (
 	"k8s.io/client-go/kubernetes"
 )
 
-func KillRandomPod(client *kubernetes.Clientset, namespace string){
-	pods := GetPods(client, namespace)
+func KillRandomPod(client kubernetes.Interface, namespace string){
+	pods, _ := GetPods(client, namespace)
 	randomPodIndex := rand.Int63nRange(0, int64(len(pods.Items)-1))
 	selectedPod := pods.Items[randomPodIndex]
 	utils.LogInfo(fmt.Sprintf("attempting to kill pod number %d, name: %s", randomPodIndex +1, selectedPod.Name))
