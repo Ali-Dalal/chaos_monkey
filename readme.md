@@ -8,6 +8,11 @@ Go application that targets a namespace and kill a pod randomly. Schedule rate a
 - helm chart
 - minikube (for testing)
 
+# Running tests
+```shell
+go test ./... -v 
+```
+
 # Build the application
 Docker image for this application is already available on docker registry
 https://hub.docker.com/r/allloush92/chaos_monkey
